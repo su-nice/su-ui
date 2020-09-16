@@ -1,0 +1,33 @@
+.su-btn{
+    line-height: 1.5;
+    padding: 6px 12px;
+    border: 1px solid @border-color;
+    background: none;
+    border-radius: @border-radius;
+    cursor: pointer;
+    &+.su-btn{
+        margin-left: 10px;
+    }
+    &.su-btn_primary {
+        border-color: @primary;
+        background: @primary;
+        color: #fff;
+    }
+    &.su-btn_dashed {
+        border-style: dashed;
+    }
+    &.su-btn_danger {
+        border-color: @error-color;
+        background: @error-color;
+        color: #fff;
+    }
+    &.su-btn_link {
+        border: none;
+    }
+    &.su-btn_disabled {
+        border-color: @border-color;
+        background: @disabled-background;
+        cursor: not-allowed;
+        color: @text-color;
+    }
+}

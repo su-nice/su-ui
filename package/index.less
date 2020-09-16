@@ -1,0 +1,25 @@
+@import 'tab/src/tab.less';
+@import 'tab-item/src/tab-item.less';
+@import 'message/src/message.less';
+@import 'button/src/button.less';
+@import 'select/src/select.less';
+@import 'select-option/src/option.less';
+@import 'ellipsis/src/ellipsis.less';
+@import 'tooltip/src/tooltip.less';
+@import 'guide/src/guide.less';
+
+.slide-up-enter {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.slide-up-enter-active {
+	transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+
+.slide-up-leave-active {
+	transition: transform 0.5s ease, opacity 0.5s ease;
+	transform: translateY(-100%);
+    opacity: 0;
+}

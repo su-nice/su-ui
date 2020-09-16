@@ -1,0 +1,28 @@
+.su-tab_bar {
+	position: relative;
+    border-bottom: 1px solid @border-color;
+    overflow: hidden;
+	&::before {
+        content: '';
+		display: block;
+		position: absolute;
+		width: calc(var(--target-width, 0) * 1px);
+        left: calc(var(--target-left, -299) * 1px);
+        bottom: -1px;
+        height: 2px;
+        background-color: @primary;
+        transition: left 0.5s, width 0.1s;
+	}
+}
+.su-tab_bar_label {
+	display: inline-block;
+	padding: 12px 16px;
+	cursor: pointer;
+	&.su-tab_bar_label_active {
+		color: @primary;
+	}
+	&.su-tab_bar_label_disabled {
+		color: @disabled;
+		cursor: not-allowed;
+	}
+}

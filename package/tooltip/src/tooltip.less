@@ -1,0 +1,58 @@
+.su-tooltip{
+    display: inline-block;
+}
+.su-tooltip_content {
+	line-height: 1.5;
+	background-color: var(--bgColor, #303133);
+    box-shadow: @box-shadow;
+    border-radius: @border-radius;
+
+	&[data-popper-placement^='top'] > .su-tooltip_arrow {
+		bottom: -4px;
+	}
+
+	&[data-popper-placement^='bottom'] > .su-tooltip_arrow {
+		top: -4px;
+	}
+
+	&[data-popper-placement^='left'] > .su-tooltip_arrow {
+		right: -4px;
+	}
+
+	&[data-popper-placement^='right'] > .su-tooltip_arrow {
+		left: -4px;
+    }
+    .su-tooltip_content_con{
+        position: relative;
+        z-index: 1;
+        padding: 10px;
+        background-color: var(--bgColor, #303133);
+        color: var(--color, #fff);
+        border-radius: @border-radius;
+    }
+	.su-tooltip_arrow {
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+            z-index: -1;
+			width: 10px;
+			height: 10px;
+			background-color: @border-color;
+			transform: rotate(45deg);
+            box-shadow: @box-shadow;
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			top: 1px;
+			left: 0;
+            z-index: -1;
+			width: 10px;
+			height: 10px;
+            background-color: var(--bgColor, #000000);
+			transform: rotate(45deg);
+		}
+	}
+}

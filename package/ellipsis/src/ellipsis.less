@@ -1,0 +1,16 @@
+.su-ellipsis {
+    position: relative;
+    overflow: hidden;
+    &.su-ellipsis_moving {
+        .su-ellipsis_content {
+            transform: translateX(calc(-100% + var(--target-width, 0) * 1px));
+        }
+    }
+}
+.su-ellipsis_content {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: transform calc(var(--target-width, 0) * 10ms);
+}

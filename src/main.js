@@ -2,8 +2,12 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import sui from '../package/index';
+import '@/assets/base.less';
+import 'package/index.less';
 
 Vue.config.productionTip = false;
+Vue.use(sui);
 
 new Vue({
   router,

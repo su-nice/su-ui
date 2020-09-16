@@ -1,0 +1,17 @@
+<template>
+    <su-tab>
+        <su-tab-item title="选项卡一">123</su-tab-item>
+        <su-tab-item title="选项卡二" :disabled="true">1234</su-tab-item>
+        <su-tab-item title="长度选项卡三">12345</su-tab-item>
+    </su-tab>
+</template>
+    
+<script>
+export default {
+    
+};
+</script>
+
+<style lang="less" scoped>
+
+</style>
