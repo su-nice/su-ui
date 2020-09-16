@@ -38,6 +38,16 @@ export default {
 					title: '提示2',
 					content: '都可以，',
 				},
+				{
+					el: this.$el.querySelector('[data-guide="guide-3"]'),
+					title: '提示3',
+					content: '都可以，',
+				},
+				{
+					el: this.$el.querySelector('[data-guide="guide-4"]'),
+					title: '提示4',
+					content: '都可以，',
+				},
 			],
 		});
 			this.guide.show();

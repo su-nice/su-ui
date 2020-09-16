@@ -83,6 +83,7 @@ export default {
 		show() {
 			this.visible = true;
 			if (!this.popperInstance) {
+				document.body.appendChild(this.$refs.content);
 				this.popperInstance = createPopper(this.$el, this.$refs.content, {
 					placement: 'bottom',
 					modifiers: [
