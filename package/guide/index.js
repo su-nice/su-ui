@@ -5,23 +5,28 @@ const VueConstruct = Vue.extend(Tmp);
 class Guide {
     constructor(opts){
         this.opts = opts;
-        this.instance = null;
+        this.instance = new VueConstruct({
+            el: document.createElement('div'),
+            propsData: {
+                ...this.opts
+            }
+        });
         return this;
     }
     show(step = 0){
-        if(!this.instance){
-            this.instance = new VueConstruct({
-                el: document.createElement('div'),
-                propsData: {
-                    ...this.opts
-                }
-            });
-            document.body.appendChild(this.instance.$el);
-        }
         this.instance.show(step);
+    }
+    add(obj){
+        this.instance.add(obj);
+    }
+    remove(obj){
+        this.instance.remove(obj);
     }
     hide(){
         this.instance.hide();
+    }
+    destroy(){
+        this.instance.destroy();
     }
 }
 

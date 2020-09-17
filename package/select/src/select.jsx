@@ -1,4 +1,4 @@
-import { getClassName } from '../../utils/component/component';
+import { getClassName, getNextIndex } from '../../utils/component/component';
 import { createPopper } from '@popperjs/core';
 export default {
 	name: 'Select',
@@ -26,12 +26,14 @@ export default {
 			list: [],
 			result: [],
 			width: 0,
+			zIndex: 0,
 		};
 	},
 	computed: {
 		contentStyle() {
 			let style = {
 				minWidth: this.width + 'px',
+				zIndex: this.zIndex,
 			};
 			return style;
 		},
@@ -39,8 +41,8 @@ export default {
 	created() {
 		this.initValue();
 	},
-	beforeDestory() {
-		document.documentElement.removeEventListener('click', this.hide);
+	beforeDestroy() {
+		this.destroy();
 	},
 	methods: {
 		initValue() {
@@ -82,6 +84,7 @@ export default {
 		},
 		show() {
 			this.visible = true;
+			this.zIndex = getNextIndex(this.zIndex);
 			if (!this.popperInstance) {
 				document.body.appendChild(this.$refs.content);
 				this.popperInstance = createPopper(this.$el, this.$refs.content, {
@@ -108,6 +111,13 @@ export default {
 		},
 		hide() {
 			this.visible = false;
+		},
+		destroy(){
+			this.visible = false;
+			document.body.removeChild(this.$refs.content);
+			this.popperInstance.destroy();
+			this.popperInstance = null;
+			document.documentElement.removeEventListener('click', this.hide);
 		},
 	},
 	render() {

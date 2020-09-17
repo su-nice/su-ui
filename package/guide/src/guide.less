@@ -5,15 +5,37 @@
     right: 0;
     bottom: 0;
     z-index: 10000;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
 }
-
+.su-guide_parent {
+	z-index: auto !important;
+}
+.su-guide_active {
+	z-index: 99999 !important;
+	&::before{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1;
+		box-shadow: @box-shadow;
+	}
+}
+.su-guide_active_relative {
+	position: relative;
+}
+.su-guide_transition {
+    transition: transform 0.5s;
+}
 .su-guide {
 	line-height: 1.5;
 	background-color: #fff;
     box-shadow: @box-shadow;
-    border-radius: @border-radius;
-    transition: tranform 0.5s;
+	border-radius: @border-radius;
+	
+	animation: guide 0.5s;
 
 	&[data-popper-placement^='top'] > .su-guide_arrow {
 		bottom: -4px;
@@ -70,5 +92,13 @@
             background-color: #fff;
 			transform: rotate(45deg);
 		}
+	}
+}
+@keyframes guide{
+	0%{
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

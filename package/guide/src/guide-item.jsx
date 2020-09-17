@@ -15,7 +15,7 @@ export default {
 	},
 	render() {
 		if (this.data.render) {
-			return <div class={getClassName('guide', 'item')}>123{this.data.render}</div>;
+			return <div class={getClassName('guide', 'item')}>{this.data.render}</div>;
 		} else {
 			return (
 				<div class={getClassName('guide', 'item')}>

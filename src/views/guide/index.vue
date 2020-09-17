@@ -9,6 +9,8 @@
 		<br />
 		<div>
 			<su-button @click="show" type="primary">显示</su-button>
+			<su-button @click="add" type="primary">增加</su-button>
+			<su-button @click="remove" type="primary">移除</su-button>
 		</div>
 	</div>
 </template>
@@ -20,9 +22,11 @@ export default {
 			guide: null,
 		};
 	},
-	methods: {
-		show() {
-            this.guide = new this.$guide({
+	beforeDestroy() {
+		this.guide && this.guide.destroy();
+	},
+	mounted() {
+		this.guide = new this.$guide({
 			list: [
 				{
 					el: this.$el.querySelector('[data-guide="guide-1"]'),
@@ -39,17 +43,31 @@ export default {
 					content: '都可以，',
 				},
 				{
-					el: this.$el.querySelector('[data-guide="guide-3"]'),
-					title: '提示3',
-					content: '都可以，',
-				},
-				{
 					el: this.$el.querySelector('[data-guide="guide-4"]'),
 					title: '提示4',
 					content: '都可以，',
 				},
 			],
 		});
+	},
+	methods: {
+		show() {
+			this.guide.show();
+		},
+		add() {
+			this.guide.add({
+				el: this.$el.querySelector('[data-guide="guide-3"]'),
+				title: '提示3',
+				content: '都可以，',
+			});
+			this.guide.show();
+		},
+		remove() {
+			this.guide.remove({
+				el: this.$el.querySelector('[data-guide="guide-1"]'),
+				title: '提示1',
+				content: '都可以，',
+			});
 			this.guide.show();
 		},
 		handleClick() {
