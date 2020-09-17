@@ -37,7 +37,10 @@ export default {
         }
     },
     mounted(){
+        this.curIndex = this.value;
         this.$nextTick(() => {
+            this.barWidth = this.$refs.bar.clientWidth;
+            this.offsetWidth = this.$refs.list.offsetWidth;
             this.setStyle(this.tab[this.curIndex].elm);
         });
     },
@@ -55,6 +58,12 @@ export default {
             target.parentElement.style.setProperty('--target-height', target.clientHeight);
             target.parentElement.style.setProperty('--target-left', target.offsetLeft);
             target.parentElement.style.setProperty('--target-top', target.offsetTop);
+            if(target.clientWidth + target.offsetLeft + this.translateX - this.barWidth > 0) { 
+                console.log(1);
+                this.translateX = this.barWidth - target.clientWidth - target.offsetLeft;
+            } else if(target.offsetLeft + this.translateX < 0){
+                this.translateX = this.translateX + target.clientWidth;
+            }
         },
         handleMouseenter(){
             this.barWidth = this.$refs.bar.clientWidth;
