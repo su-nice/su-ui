@@ -12,7 +12,24 @@ export default {
             list: [],
             curIndex: 0,
             tab: [],
+            translateX: 0,
+            barWidth: 0,
+            offsetWidth: 0,
+            showCtrl: false,
 		};
+    },
+    computed: {
+        prevShow(){
+            return this.showCtrl && this.translateX !== 0;
+        },
+        nextShow(){
+            return this.showCtrl && this.offsetWidth - this.barWidth + this.translateX > 0;
+        },
+        listStyle(){
+            return {
+                transform: `translateX(${this.translateX}px)`
+            };
+        }
     },
     watch: {
         value(value){
@@ -38,6 +55,29 @@ export default {
             target.parentElement.style.setProperty('--target-height', target.clientHeight);
             target.parentElement.style.setProperty('--target-left', target.offsetLeft);
             target.parentElement.style.setProperty('--target-top', target.offsetTop);
+        },
+        handleMouseenter(){
+            this.barWidth = this.$refs.bar.clientWidth;
+            this.offsetWidth = this.$refs.list.offsetWidth;
+            this.showCtrl = true;
+        },
+        handleMouseleave(){
+            this.showCtrl = false;
+        },
+        handlePrev(){
+            if(Math.abs(this.translateX) > this.barWidth) {
+                this.translateX = this.translateX + this.barWidth;
+            } else {
+                this.translateX = 0;
+            }
+        },
+        handleNext(){
+            const width = this.offsetWidth - this.barWidth + this.translateX;
+            if(width > this.barWidth) {
+                this.translateX = this.translateX - this.barWidth;
+            } else {
+                this.translateX = this.translateX - width;
+            }
         }
     },
 	render() {
@@ -54,8 +94,12 @@ export default {
         this.tab = tab;
 		return (
 			<div class={getClassName('tab')}>
-				<div class={getClassName('tab', 'bar')}>
-					{tab}
+				<div ref="bar" class={getClassName('tab', 'bar')} onMouseenter={this.handleMouseenter} onMouseleave={this.handleMouseleave}>
+					<div ref="list" class={getClassName('tab', 'bar', 'list')} style={this.listStyle}>
+                        {tab}
+                    </div>
+                    <div class={getClassName('tab', 'prev')} v-show={this.prevShow} onClick={this.handlePrev}></div>
+                    <div class={getClassName('tab', 'next')} v-show={this.nextShow} onClick={this.handleNext}></div>
 				</div>
 				{this.$slots.default}
 			</div>
